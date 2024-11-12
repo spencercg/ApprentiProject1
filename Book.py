@@ -18,18 +18,13 @@ class Book:
         return_request = input("Please enter the title of the book you are returning: ")
         Book.available = True
         print(return_request + " has been successfully returned")
-
-
-
-'''
-    def create_book(self):        
+    '''
+    def create_book(self): 
+        print("You have selected the Add Book option.")       
         self.title = input("Please enter the title of the new book: ")
         print(self.title)
-'''
-
-
-
-def __init__(self, title, author, isbn, available):
+    '''
+    def __init__(self, title, author, isbn, available):
         self.title = title
         self.author = author
         self.isbn = isbn
@@ -43,4 +38,5 @@ Moby_Dick = Book("Moby Dick", "Herman Melville", "12341234", True)
 
 # Moby_Dick.borrow_book()
 
-print(Moby_Dick.available)
+print(Moby_Dick.author)
+
