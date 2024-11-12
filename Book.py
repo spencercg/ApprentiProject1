@@ -33,10 +33,13 @@ class Book:
 
 
 
+'''
+book_1 = Book("Moby Dick", "Herman Melville", "12341234", True)
+book_2 = Book("1984", "George Orwell", "13571357", True)
+book_3 = Book("Blood Meridian", "Cormac McCarthy", "45674567", True)
+book_4 = Book("Catch-22", "Kurt Vonnegut", "24682468", True)
 
-Moby_Dick = Book("Moby Dick", "Herman Melville", "12341234", True)
 
-# Moby_Dick.borrow_book()
+books_list = [book_1, book_2, book_3, book_4]
 
-print(Moby_Dick.author)
-
+'''
