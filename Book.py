@@ -21,15 +21,15 @@ class Book:
 
 
 
-
-    def create_book(self):
+'''
+    def create_book(self):        
         self.title = input("Please enter the title of the new book: ")
         print(self.title)
+'''
 
 
 
-
-    def __init__(self, title, author, isbn, available):
+def __init__(self, title, author, isbn, available):
         self.title = title
         self.author = author
         self.isbn = isbn
@@ -39,8 +39,8 @@ class Book:
 
 
 
-# Moby_Dick = Book("Moby Dick", "Herman Melville", "12341234", True)
+Moby_Dick = Book("Moby Dick", "Herman Melville", "12341234", True)
 
 # Moby_Dick.borrow_book()
 
-# print(Moby_Dick.available)
+print(Moby_Dick.available)
