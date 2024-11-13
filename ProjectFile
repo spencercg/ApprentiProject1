@@ -1,7 +1,0 @@
-# This is the Project File for Project 1
-
-
-
-from Book import Moby_Dick
-
-print(Moby_Dick.title)

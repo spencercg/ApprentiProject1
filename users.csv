@@ -1,2 +1,5 @@
-user_name, user_id
-Abigail, 0001, ["Moby Dick", "1984"]
+user_name, user_id, borrowed_books
+Abigail, 0001, "Moby Dick", "1984", "Animal Farm"
+Jacob,0015,Doors of Perception
+Johnny,1234
+Susan,01234
