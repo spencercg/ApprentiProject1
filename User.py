@@ -9,8 +9,15 @@ class User:
     def borrow_book(self, title):
         borrowed_books = self.borrowed_books
         borrowed_books.append(title)
-        
 
+    def return_book(self, title):
+        borrowed_books = self.borrowed_books
+        borrowed_books.remove(title)
+
+    def view_borrowed_books(self):
+        borrowed_books = self.borrowed_books
+        print(borrowed_books)
+        
     def __init__(self, name, user_id, borrowed_books):
         self.name = name 
         self.user_id = user_id
@@ -19,7 +26,7 @@ class User:
 
 
 
-
+'''
 user_1 = User("Abigail", "0001", [])
 # user_1_name = user_1.name
 user_2 = User("Betty", "0002", [])
@@ -30,7 +37,7 @@ user_3 = User("Christian", "0003", [])
 # users_list = [user_1_name, user_2_name, user_3_name]
 
 users_list = [user_1, user_2, user_3]
-
+'''
 
 
 
