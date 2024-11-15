@@ -17,16 +17,14 @@ class Book:
     
 
     def borrow_book(self):
-#        borrow_request = input("Please enter the title of the book you would like to borrow: ")
-        if borrow_request in books_list:
 
-            Book.available = False
-            print(borrow_request + " has been successfully checked out.")
-            print(Book.available)
+            self.available = False
+#            print(Book.available)
+#            print(Book.title + "is available: " + Book.available)
 
     def return_book(self):
         return_request = input("Please enter the title of the book you are returning: ")
-        Book.available = True
+        self.available = True
         print(return_request + " has been successfully returned")
     '''
     def create_book(self): 
@@ -47,13 +45,11 @@ book_1 = Book("Moby Dick", "Herman Melville", "12341234", True)
 book_2 = Book("1984", "George Orwell", "13571357", True)
 book_3 = Book("Blood Meridian", "Cormac McCarthy", "45674567", True)
 book_4 = Book("Catch-22", "Kurt Vonnegut", "24682468", True)
-'''
+
 # books_list = [book_1.__str__(), book_2.__str__(), book_3.__str__(), book_4.__str__()]
 
-# books_list = [book_1, book_2, book_3, book_4]
-
-
-
+books_list = [book_1, book_2, book_3, book_4]
+'''
 
 
 '''
