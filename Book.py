@@ -1,3 +1,5 @@
+
+
 class Book:
     title: str
     author: str
@@ -5,14 +7,22 @@ class Book:
     available: bool
 
 
-# I need to update borrow and return so that status of availability actually changes
 
+
+
+# I need to update borrow and return so that status of availability actually changes
+    
+    def __str__(self):
+        return f"{self.title}"
+    
 
     def borrow_book(self):
-        borrow_request = input("Please enter the title of the book you would like to request: ")
-        Book.available = False
-        print(borrow_request + " has been successfully checked out.")
-        print(Book.available)
+#        borrow_request = input("Please enter the title of the book you would like to borrow: ")
+        if borrow_request in books_list:
+
+            Book.available = False
+            print(borrow_request + " has been successfully checked out.")
+            print(Book.available)
 
     def return_book(self):
         return_request = input("Please enter the title of the book you are returning: ")
@@ -32,14 +42,34 @@ class Book:
 
 
 
-
 '''
 book_1 = Book("Moby Dick", "Herman Melville", "12341234", True)
 book_2 = Book("1984", "George Orwell", "13571357", True)
 book_3 = Book("Blood Meridian", "Cormac McCarthy", "45674567", True)
 book_4 = Book("Catch-22", "Kurt Vonnegut", "24682468", True)
+'''
+# books_list = [book_1.__str__(), book_2.__str__(), book_3.__str__(), book_4.__str__()]
+
+# books_list = [book_1, book_2, book_3, book_4]
 
 
-books_list = [book_1, book_2, book_3, book_4]
+
+
 
 '''
+borrow_request = input("Please enter the title of the book you would like to borrow: ")
+if borrow_request in books_list:
+    print(borrow_request.author)
+  '''
+    
+'''
+    x = 1
+    for i in books_list:
+        if borrow_request != book_(x)
+            x += 1
+        else:
+            print(i)
+
+    '''
+
+

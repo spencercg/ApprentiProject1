@@ -1,11 +1,92 @@
 from Book import Book
 from User import User
-import csv
+
+
+
 
 class Library:
     books_list = list
     users_list = list
 
+    def add_book():
+        print('\nYou have selected the "Add book" option.')
+        user_input_title = input("\nPlease enter the new book's title: ")
+        user_input_author = input("\nPlease enter the new book's author: ")
+        user_input_isbn = input("\nPlease enter the new book's ISBN number: ")
+        new_book = Book(user_input_title, user_input_author, user_input_isbn, True)
+        new_book_title = new_book.title
+
+        books_list.append(new_book_title)
+        print()
+        print(new_book_title + "has been successfully added.")
+        print("\nHere is the updated list of available books: ")
+        print(books_list)
+
+    def remove_book():
+
+        print('\nYou have selected the "Remove book" option.')
+        print("\nBelow is the list of available books: ")
+    
+        print(books_list)
+
+        bye_book_title = input("\nPlease enter the title of the book you would like to remove: ")
+
+        if bye_book_title in books_list:
+
+            books_list.remove(bye_book_title)
+            print()
+            print(bye_book_title + " has been removed.")
+            print("\nBelow is the updated list of available books: ")
+            print(books_list)
+        
+        else:
+            print("\nTitle not found. Please try again.")
+
+
+
+    def add_user():
+        print('\nYou have selected the "Add user" option.')
+    
+        print("\nBelow is a list of the active users: ") 
+
+        print(users_list)
+
+        user_input_name = input("\nPlease enter the new user's name: ")
+
+        user_input_id = input("\nPlease enter the new user's ID number: ")
+
+        new_user = User(user_input_name, user_input_id, [])
+        new_user_name = new_user.name
+
+        users_list.append(new_user_name)
+        print()
+        print(new_user_name + " has been successfully added.")
+        print("\nHere is the updated list of active users: ")
+        print(users_list)
+
+
+    def remove_user():
+        print('\nYou have selected the "Remove user" option.')
+    
+        print("\nBelow is a list of the active users: ") 
+        print(users_list)
+
+        bye_user_name = input("\nPlease enter the name of the user you would like to remove: ")
+
+        if bye_user_name in users_list:
+            users_list.remove(bye_user_name)
+            print()
+            print(bye_user_name + " has been removed.")
+            print("\nBelow is the updated list of users: ")
+            print(users_list)
+        else:
+            print('\nUser not found. Please select "Remove user" option and try again.')
+
+
+    def list_available_books():
+        print('\nYou have selected the "List available books" option.')
+        print()
+        print(books_list)  
 
 
     def __init__(self):
@@ -14,8 +95,8 @@ class Library:
 
 
 
-# These are the books that are already in the library.
-'''
+# These are the books that are in the library and available to be checked out.
+
 book_1 = Book("Moby Dick", "Herman Melville", "12341234", True)
 book_1_title = book_1.title
 
@@ -30,15 +111,25 @@ book_4_title = book_4.title
 
 
 books_list = [book_1_title, book_2_title, book_3_title, book_4_title]
-'''
+
+
+
+# These are the books that are currently checked out.
+
+book_5 = Book("Brave New World", "Aldous Huxley", "23452345", False)
+
+book_6 = Book("The Divine Invasion", "Philip K. Dick", "34563456", False)
+
+book_7 = Book("The Magic Mountain", "Thomas Mann", "56785678", False)
+
 
 # These are the Users that are already in the Library system.
 
-user_1 = User("Abigail", "0001", [])
+user_1 = User("Abigail", "0001", [book_5])
 user_1_name = user_1.name
-user_2 = User("Betty", "0002", [])
+user_2 = User("Betty", "0002", [book_6])
 user_2_name = user_2.name
-user_3 = User("Christian", "0003", [])
+user_3 = User("Christian", "0003", [book_7])
 user_3_name = user_3.name
 
 users_list = [user_1_name, user_2_name, user_3_name]
@@ -56,6 +147,9 @@ user_input = input("\nPlease enter the number associated with the option you wou
 
 
 if user_input == str(1):
+    Library.add_book()
+    
+    '''
     print('You have selected the "Add book" option.')
     user_input_title = input("Please enter the new book's title: ")
     user_input_author = input("Please enter the new book's author: ")
@@ -63,189 +157,122 @@ if user_input == str(1):
     new_book = Book(user_input_title, user_input_author, user_input_isbn, True)
     new_book_title = new_book.title
 
-    with open('available_books.csv', 'a', newline='\n') as avail_books_csvfile:
-        writer = csv.writer(avail_books_csvfile)
-        writer.writerow([user_input_title, user_input_author, user_input_isbn])
-    
-    avail_books_list = []
-    with open('available_books.csv', "r") as file:
-
-        # delimiter is the character that separates each column
-        csv_reader = csv.reader(file, delimiter=",")
-            
-        # skip the headers with next() or a line counter
-        next(csv_reader)
-
-        for row in csv_reader: 
-            # csv module automatically puts each column into a list: [Dan,Pickles,dan.pickles@email.com]
-            book_title = row[0]
-            avail_books_list.append(book_title)
-        print("\nBelow is a list of the available book titles: ") 
-        print(avail_books_list)
-    
-    '''
     books_list.append(new_book_title)
     print("Thank you!\n\nHere is the updated list of available books: ")
     print(books_list)
     '''
+    
+    
+    
 elif user_input == str(2):
+    Library.remove_book()
+    
+    '''
     print('\nYou have selected the "Remove book" option.')
     print("\nBelow is the list of available books: ")
     
-    avail_books_list = []
-
-    with open('available_books.csv', "r") as file:
-
-        # delimiter is the character that separates each column
-        csv_reader = csv.reader(file, delimiter=",")
-            
-        # skip the headers with next() or a line counter
-        next(csv_reader)
-
-        for row in csv_reader: 
-            book_title = row[0]
-            avail_books_list.append(book_title)
-        print(avail_books_list)
-
-
-
+    print(books_list)
 
     bye_book_title = input("\nPlease enter the title of the book you would like to remove: ")
 
-    with open('available_books.csv', "r+") as file:
-        
-        csv_reader = csv.reader(file, delimiter=",")
-        
-        for row in csv_reader: 
-            book_title_row = row[0]
-            if bye_book_title == book_title_row:
-                del row
-            else:
-                continue
-        
-        for row in csv_reader: 
-            book_title = row[0]
-            avail_books_list.append(book_title)
-        print("\nBelow is a list of the available book titles: ") 
-        print(avail_books_list)    
-
-
-
-    '''
     books_list.remove(bye_book_title)
     print("Below is the updated list of available books: ")
     print(books_list)
     '''
-# Here I need to add the find and remove option for bye_book_title
 
 
 elif user_input == str(3):
-
+    Library.add_user()
+    
+    '''
     print('\nYou have selected the "Add user" option.')
     
     print("\nBelow is a list of the active users: ") 
 
     print(users_list)
 
+    user_input_name = input("\nPlease enter the new user's name: ")
 
+    user_input_id = input("\nPlease enter the new user's ID number: ")
 
+    new_user = User(user_input_name, user_input_id, [])
+    new_user_name = new_user.name
 
-    '''
-    active_users_list = []
-
-    with open('users.csv', "r") as file:
-
-        # delimiter is the character that separates each column
-        csv_reader = csv.reader(file, delimiter=",")
-            
-        # skip the headers with next() or a line counter
-        next(csv_reader)
-
-        for row in csv_reader: 
-            user_name = row[0]
-            active_users_list.append(user_name)
-        print("\nBelow is a list of the active users: ") 
-        print(active_users_list)
-
-    new_user_name = input("\nPlease enter the new user's name: ")
-
-    new_user_id = input("\nPlease enter the new user's ID number: ")
-
-    with open('users.csv', 'a', newline='\n') as users_csvfile:
-        writer = csv.writer(users_csvfile)
-        writer.writerow([new_user_name, new_user_id])
-    
-    active_users_list = []
-
-    with open('users.csv', "r") as file:
-
-        # delimiter is the character that separates each column
-        csv_reader = csv.reader(file, delimiter=",")
-            
-        # skip the headers with next() or a line counter
-        next(csv_reader)
-
-        for row in csv_reader: 
-            user_name = row[0]
-            active_users_list.append(user_name)
-        print("\nBelow is a list of the active users: ") 
-        print(active_users_list)
-
-    '''
-
-elif user_input == str(4):
-    print('\nYou have selected the "Remove user" option.')
-    
-    active_users_list = []
-
-    with open('users.csv', "r") as file:
-
-        # delimiter is the character that separates each column
-        csv_reader = csv.reader(file, delimiter=",")
-            
-        # skip the headers with next() or a line counter
-        next(csv_reader)
-
-        for row in csv_reader: 
-            user_name = row[0]
-            active_users_list.append(user_name)
-        print("\nBelow is a list of the active users: ") 
-        print(active_users_list)
-
-
-
-    bye_user_name = input("\nPlease enter the name of the user you would like to remove: ")
-
-# Add here the means to find and remove user entry from users.csv
-    '''
-    users_list.remove(bye_user_name)
-    print("User has been removed. Below is the updated list of users: ")
+    users_list.append(new_user_name)
+    print("Thank you!\n\nHere is the updated list of active users: ")
     print(users_list)
     '''
 
+    
+
+elif user_input == str(4):
+    Library.remove_user()
+    
+    '''
+    print('\nYou have selected the "Remove user" option.')
+    
+    print("\nBelow is a list of the active users: ") 
+    print(users_list)
+
+    bye_user_name = input("\nPlease enter the name of the user you would like to remove: ")
+
+    if bye_user_name in users_list:
+        users_list.remove(bye_user_name)
+        print("\nUser has been removed. Below is the updated list of users: ")
+        print(users_list)
+    else:
+        print('\nUser not found. Please select "Remove user" option and try again.')
+    '''
+
+elif user_input == str(5):
+    
+    print('\nYou have selected the "Borrow book" option.')  
+
+    print('\nBelow is a list of the available books: ')
+    print(books_list)
+    borrow_book_title = input("\nPlease enter the title of the book to be borrowed: ")
+
+    if borrow_book_title in books_list:
+        print("\nRequested title to be borrowed is " + borrow_book_title)
+       
+
+        print('\nBelow is a list of the active users: ')
+        print(users_list)
+        borrow_user_name = input("\nPlease enter the name of the user requesting to borrow the book: ")
+
+        if borrow_user_name in users_list:
+            print("\nRequested borrower is " + borrow_user_name)
+            print()
+            print(borrow_book_title + " has been successfully borrowed by " + borrow_user_name)
+
+            for borrow_book_title in books_list:
+                if borrow_book_title == book_1_title:
+                    book_1_title.borrow_book()
+
+
+
+
+
+        else:
+            print("\nInvalid input. Please try again.")
+    
+    else:
+        print("\nInvalid input. Please try again.")
+
+
+  
+
 elif user_input == str(7):
+    Library.list_available_books()
+    '''
     print('\nYou have selected the "List available books" option.')
 
-    avail_books_list = []
-
-    with open('available_books.csv', "r") as file:
-
-        # delimiter is the character that separates each column
-        csv_reader = csv.reader(file, delimiter=",")
-            
-        # skip the headers with next() or a line counter
-        next(csv_reader)
-
-        for row in csv_reader: 
-            book_title = row[0]
-            avail_books_list.append(book_title)
-        print("\nBelow is a list of the available book titles: \n") 
-        print(avail_books_list)
+    print(books_list)
+    '''
+    
 
 else:
-    print('\nInvalid input. \n\nPlease select from the list of available options: '
-    '\n 1) Add book \n 2) Remove book \n 3) Add user \n 4) Remove user \n 5) Borrow book \n 6) Return book' 
-    '\n 7) List available books')
+    print('\nInvalid input. Please try again and select from list of available options.')
 
 
 
