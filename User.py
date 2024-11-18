@@ -17,8 +17,8 @@ class User:
         print("\nThank you for returning " + title + "!")
 
     def view_borrowed_books(self):
-        borrowed_books = self.borrowed_books
-        print(borrowed_books)
+        # borrowed_books = self.borrowed_books
+        return self.borrowed_books
         
     def __init__(self, name, user_id, borrowed_books):
         self.name = name 
@@ -39,8 +39,9 @@ user_3 = User("Christian", "0003", [])
 # users_list = [user_1_name, user_2_name, user_3_name]
 
 users_list = [user_1, user_2, user_3]
-'''
 
+user_3.view_borrowed_books()
+'''
 
 
 

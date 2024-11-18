@@ -22,6 +22,8 @@ class Library:
         print("\nHere is the updated list of available books: ")
         print(books_str_list)
 
+        books_list.append(new_book)
+
     def remove_book():
 
         print('\nYou have selected the "Remove book" option.')
@@ -63,6 +65,7 @@ class Library:
         print("\nHere is the updated list of active users: ")
         print(users_str_list)
 
+        users_list.append(new_user)
 
     def remove_user():
         print('\nYou have selected the "Remove user" option.')
@@ -126,7 +129,10 @@ class Library:
                         index = users_str_list.index(j)
                         users_list[index].borrow_book(borrow_book_title)
                         print(borrow_user_name + " is currently borrowing the following books: ")
-                        print(users_list[index].borrowed_books)
+                        # print(users_list[index].borrowed_books)
+                        print(users_list[index].view_borrowed_books())
+                    else:
+                        continue
 
                        
             else:
@@ -233,8 +239,9 @@ class Library:
 
     def list_available_books():
         print('\nYou have selected the "List available books" option.')
+        print("\nBelow is a list of the available books: ")
         print()
-        print(books_str_list)  
+        print(books_str_list)
 
 
     def __init__(self):
@@ -520,7 +527,7 @@ while user_input != str(0):
         break
 
 if user_input == str(0):
-    print("\nThank you for using the Library Management System!")
+    print("\nThank you for using the Library Management System!\n")
 # input("\nPlease enter the number associated with the option you would like to select:")
 
 
