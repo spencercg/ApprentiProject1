@@ -171,6 +171,7 @@ class Library:
                 print()
                 print(b.name + " is returning " + book_to_return + ".")
                 b.return_book(book_to_return)
+                print("\nThank you for returning " + book_to_return + "!")
             else:
                 continue
 

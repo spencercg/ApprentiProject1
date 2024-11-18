@@ -14,7 +14,7 @@ class User:
     def return_book(self, title):
         borrowed_books = self.borrowed_books
         borrowed_books.remove(title)
-        print("\nThank you for returning " + title + "!")
+        # print("\nThank you for returning " + title + "!")
 
     def view_borrowed_books(self):
         # borrowed_books = self.borrowed_books
