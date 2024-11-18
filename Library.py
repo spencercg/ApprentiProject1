@@ -82,6 +82,7 @@ class Library:
             print('\nUser not found. Please select "Remove user" option and try again.')
 
     def borrow_book():
+
         print('\nYou have selected the "Borrow book" option.')  
 
         print('\nBelow is a list of the available books: ')
@@ -96,17 +97,22 @@ class Library:
             print('\nBelow is a list of the active users: ')
             print(users_str_list)
             borrow_user_name = input("\nPlease enter the name of the user requesting to borrow the book: ")
+        
 
             if borrow_user_name in users_str_list:
+                
                 print("\nRequested borrower is " + borrow_user_name + ".")
                 print()
                 print(borrow_book_title + " has been successfully borrowed by " + borrow_user_name + ".")
+                
+                
 
                 for i in books_str_list:
                     if i == borrow_book_title:
                         index = books_str_list.index(i)
                         books_list[index].borrow_book()
                         books_str_list.remove(i)
+                        
 
                 
                         # print(books_list[index].available)
@@ -130,13 +136,72 @@ class Library:
             print("\nInvalid input. Please try again.")
 
     def return_book():
-
+        
+        
+        
+        checked_out_master_list_str = []
+        
         print('\nYou have selected the "Return book" option.')  
 
         print('\nBelow is a list of the books that can be returned: ')
+        
+        for m in books_list:
+            if m.available == False:
+                checked_out_master_list.append(m)
+            else:
+                continue
 
-        checked_out_list = []
-    
+        for n in checked_out_master_list:
+            str_title = n.__str__()
+            checked_out_master_list_str.append(str_title)
+
+        print(checked_out_master_list_str)
+
+        book_to_return = input("\nPlease enter the title of the book you would like to return: ")
+
+
+        for b in users_list:
+            if book_to_return in b.borrowed_books:
+                print()
+                print(b.name + " is returning " + book_to_return + ".")
+                b.return_book(book_to_return)
+            else:
+                continue
+
+
+
+        if book_to_return in checked_out_master_list_str:
+            checked_out_master_list_str.remove(book_to_return)
+            for p in checked_out_master_list:
+                if p.title == book_to_return:
+                    p.return_book()
+                    # print(p.available)
+
+                    books_list.append(p)
+                    returned_book_title = p.title.__str__()
+                    books_str_list.append(returned_book_title)
+                    # print(books_str_list)
+
+                else:
+                    continue
+
+        
+                    
+                        
+
+
+        else:
+            print("\nInvalid input. Please try again.")
+            
+
+
+
+        
+
+
+
+        '''
+
         for k in users_list:
             checked_out_book = k.borrowed_books
 
@@ -164,7 +229,7 @@ class Library:
 
         else:
             print("Invalid input. Please try again.")        
-
+        '''
 
     def list_available_books():
         print('\nYou have selected the "List available books" option.')
@@ -204,6 +269,8 @@ book_7 = Book("The Magic Mountain", "Thomas Mann", "56785678", False)
 
 checked_out_master_list = [book_5, book_6, book_7]
 
+
+
 # These are the Users that are already in the Library system.
 
 user_1 = User("Abigail", "0001", [book_5.title])
@@ -218,7 +285,7 @@ users_str_list = [user_1.__str__(), user_2.__str__(), user_3.__str__()]
 
 # Welcome screen for the Library Management Systemm
 
-print("Welcome to the Library Management System. Below is a list of the available options:"
+print("\nWelcome to the Library Management System. \n\nBelow is a list of the available options:\n"
  "\n 1) Add book \n 2) Remove book \n 3) Add user \n 4) Remove user \n 5) Borrow book \n 6) Return book" 
  "\n 7) List available books\n 0) Quit program" )
 

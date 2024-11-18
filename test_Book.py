@@ -1,14 +1,17 @@
 import unittest
-import Book
+from Book import Book
 
-# book_1 = Book("Moby Dick", "Herman Melville", "12341234", True)
+
 
 
 class TestCalc(unittest.TestCase):
 
     def test_available(self):
-        result = self.borrow_book(book_1)
-        self.assertEqual(result, False)
+        book_1 = Book("Moby Dick", "Herman Melville", "12341234", True)
+        self.assertEqual(book_1.available, False)
+        book_1.borrow_book()
+        result = book_1.available
+        self.assertEqual(result, True)
 
 if __name__ == '__main__':
     unittest.main()
