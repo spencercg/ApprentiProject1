@@ -2,8 +2,6 @@ from Book import Book
 from User import User
 
 
-
-
 class Library:
     books_list = list
     users_list = list
@@ -43,7 +41,6 @@ class Library:
         
         else:
             print("\nTitle not found. Please try again.")
-
 
     def add_user():
         print('\nYou have selected the "Add user" option.')
@@ -107,18 +104,12 @@ class Library:
                 print("\nRequested borrower is " + borrow_user_name + ".")
                 print()
                 print(borrow_book_title + " has been successfully borrowed by " + borrow_user_name + ".")
-                
-                
 
                 for i in books_str_list:
                     if i == borrow_book_title:
-                        index = books_str_list.index(i)
-                        books_list[index].borrow_book()
+                        index_book = books_str_list.index(i)
+                        books_list[index_book].borrow_book()
                         books_str_list.remove(i)
-                        
-
-                
-                        # print(books_list[index].available)
                         print()
 
                     else:
@@ -126,15 +117,14 @@ class Library:
 
                 for j in users_str_list:
                     if j == borrow_user_name:
-                        index = users_str_list.index(j)
-                        users_list[index].borrow_book(borrow_book_title)
+                        index_user = users_str_list.index(j)
+                        users_list[index_user].borrow_book(borrow_book_title)
                         print(borrow_user_name + " is currently borrowing the following books: ")
                         # print(users_list[index].borrowed_books)
-                        print(users_list[index].view_borrowed_books())
+                        print(users_list[index_user].view_borrowed_books())
                     else:
                         continue
 
-                       
             else:
                 print("\nInvalid input. Please try again.")
     
@@ -143,8 +133,6 @@ class Library:
 
     def return_book():
         
-        
-        
         checked_out_master_list_str = []
         
         print('\nYou have selected the "Return book" option.')  
@@ -152,14 +140,17 @@ class Library:
         print('\nBelow is a list of the books that can be returned: ')
         
         for m in books_list:
-            if m.available == False:
-                checked_out_master_list.append(m)
+            if m.available == False and m.title not in checked_out_master_list_str:
+                checked_out_master_list_str.append(m.title)
             else:
                 continue
 
-        for n in checked_out_master_list:
-            str_title = n.__str__()
-            checked_out_master_list_str.append(str_title)
+        for n in checked_out_starter_list:
+            if n.available == False and n.title not in checked_out_master_list_str:
+                str_title = n.__str__()
+                checked_out_master_list_str.append(str_title)
+            else:
+                continue
 
         print(checked_out_master_list_str)
 
@@ -176,68 +167,22 @@ class Library:
                 continue
 
 
-
         if book_to_return in checked_out_master_list_str:
             checked_out_master_list_str.remove(book_to_return)
-            for p in checked_out_master_list:
+            for p in checked_out_starter_list:
                 if p.title == book_to_return:
                     p.return_book()
-                    # print(p.available)
 
                     books_list.append(p)
                     returned_book_title = p.title.__str__()
                     books_str_list.append(returned_book_title)
-                    # print(books_str_list)
 
                 else:
                     continue
-
-        
-                    
-                        
-
 
         else:
             print("\nInvalid input. Please try again.")
             
-
-
-
-        
-
-
-
-        '''
-
-        for k in users_list:
-            checked_out_book = k.borrowed_books
-
-            str_chk_out_book = checked_out_book[0]
-            
-            checked_out_list.append(str_chk_out_book)
-            
-        print(checked_out_list)
-
-        book_to_return = input("\nPlease enter the title of the book you would like to return: ")
-
-        if book_to_return in checked_out_list:
-            print("\nYou have selected to return " + book_to_return)
-            for m in checked_out_master_list:
-                if m.title == book_to_return:
-                    m.return_book()
-                    books_list.append(m)
-                    books_str_list.append(m.title)
-                    print("\nBelow is a list of the available books: ")
-                    print()
-                    print(books_str_list)
-                else:
-                    continue
-
-
-        else:
-            print("Invalid input. Please try again.")        
-        '''
-
     def list_available_books():
         print('\nYou have selected the "List available books" option.')
         print("\nBelow is a list of the available books: ")
@@ -252,9 +197,6 @@ class Library:
 
 
 # These are the books that are in the library and available to be checked out.
-
-
-
 
 book_1 = Book("Moby Dick", "Herman Melville", "12341234", True)
 book_2 = Book("1984", "George Orwell", "13571357", True)
@@ -275,7 +217,8 @@ book_6 = Book("The Divine Invasion", "Philip K. Dick", "34563456", False)
 
 book_7 = Book("The Magic Mountain", "Thomas Mann", "56785678", False)
 
-checked_out_master_list = [book_5, book_6, book_7]
+
+checked_out_starter_list = [book_5, book_6, book_7]
 
 
 
@@ -284,6 +227,7 @@ checked_out_master_list = [book_5, book_6, book_7]
 user_1 = User("Abigail", "0001", [book_5.title])
 user_2 = User("Betty", "0002", [book_6.title])
 user_3 = User("Christian", "0003", [book_7.title])
+
 
 users_list = [user_1, user_2, user_3]
 
@@ -298,38 +242,19 @@ print("\nWelcome to the Library Management System. \n\nBelow is a list of the av
  "\n 7) List available books\n 0) Quit program" )
 
 
-
 user_input = input("\nPlease enter the number associated with the option you would like to select: ")
 
 while user_input != str(0):
 
-
     if user_input == str(1):
         Library.add_book()
-
-        
-
 
         print("\nWelcome to the Library Management System. Below is a list of the available options:"
                 "\n 1) Add book \n 2) Remove book \n 3) Add user \n 4) Remove user \n 5) Borrow book \n 6) Return book" 
                 "\n 7) List available books\n 0) Quit program" )
     
         user_input = input("\nPlease enter the number associated with the option you would like to select: ")
-        '''
-    print('You have selected the "Add book" option.')
-    user_input_title = input("Please enter the new book's title: ")
-    user_input_author = input("Please enter the new book's author: ")
-    user_input_isbn = input("Please enter the new book's ISBN number: ")
-    new_book = Book(user_input_title, user_input_author, user_input_isbn, True)
-    new_book_title = new_book.title
-
-    books_list.append(new_book_title)
-    print("Thank you!\n\nHere is the updated list of available books: ")
-    print(books_list)
-        '''
-    
-    
-    
+            
     elif user_input == str(2):
         Library.remove_book()
 
@@ -338,20 +263,7 @@ while user_input != str(0):
                 "\n 7) List available books\n 0) Quit program" )
     
         user_input = input("\nPlease enter the number associated with the option you would like to select: ")
-        '''
-    print('\nYou have selected the "Remove book" option.')
-    print("\nBelow is the list of available books: ")
-    
-    print(books_list)
-
-    bye_book_title = input("\nPlease enter the title of the book you would like to remove: ")
-
-    books_list.remove(bye_book_title)
-    print("Below is the updated list of available books: ")
-    print(books_list)
-        '''
-
-
+        
     elif user_input == str(3):
         Library.add_user()
         
@@ -360,25 +272,6 @@ while user_input != str(0):
                 "\n 7) List available books\n 0) Quit program" )
     
         user_input = input("\nPlease enter the number associated with the option you would like to select: ")
-        '''
-    print('\nYou have selected the "Add user" option.')
-    
-    print("\nBelow is a list of the active users: ") 
-
-    print(users_list)
-
-    user_input_name = input("\nPlease enter the new user's name: ")
-
-    user_input_id = input("\nPlease enter the new user's ID number: ")
-
-    new_user = User(user_input_name, user_input_id, [])
-    new_user_name = new_user.name
-
-    users_list.append(new_user_name)
-    print("Thank you!\n\nHere is the updated list of active users: ")
-    print(users_list)
-        '''
-
 
     elif user_input == str(4):
         Library.remove_user()
@@ -388,73 +281,10 @@ while user_input != str(0):
                 "\n 7) List available books\n 0) Quit program" )
     
         user_input = input("\nPlease enter the number associated with the option you would like to select: ")
-        '''
-    print('\nYou have selected the "Remove user" option.')
-    
-    print("\nBelow is a list of the active users: ") 
-    print(users_list)
-
-    bye_user_name = input("\nPlease enter the name of the user you would like to remove: ")
-
-    if bye_user_name in users_list:
-        users_list.remove(bye_user_name)
-        print("\nUser has been removed. Below is the updated list of users: ")
-        print(users_list)
-    else:
-        print('\nUser not found. Please select "Remove user" option and try again.')
-        '''
 
     elif user_input == str(5):
         Library.borrow_book()
 
-        '''
-        print('\nYou have selected the "Borrow book" option.')  
-
-        print('\nBelow is a list of the available books: ')
-        print(books_str_list)
-        borrow_book_title = input("\nPlease enter the title of the book to be borrowed: ")
-                   
-        
-        if borrow_book_title in books_str_list:
-            print("\nRequested title to be borrowed is " + borrow_book_title + ".")
-       
-
-            print('\nBelow is a list of the active users: ')
-            print(users_str_list)
-            borrow_user_name = input("\nPlease enter the name of the user requesting to borrow the book: ")
-
-            if borrow_user_name in users_str_list:
-                print("\nRequested borrower is " + borrow_user_name + ".")
-                print()
-                print(borrow_book_title + " has been successfully borrowed by " + borrow_user_name + ".")
-
-                for i in books_str_list:
-                    if i == borrow_book_title:
-                        index = books_str_list.index(i)
-                        books_list[index].borrow_book()
-                        books_str_list.remove(i)
-
-                
-                        # print(books_list[index].available)
-                        print()
-
-                    else:
-                        continue
-
-                for j in users_str_list:
-                    if j == borrow_user_name:
-                        index = users_str_list.index(j)
-                        users_list[index].borrow_book(borrow_book_title)
-                        print(borrow_user_name + " is currently borrowing the following books: ")
-                        print(users_list[index].borrowed_books)
-
-                       
-            else:
-                print("\nInvalid input. Please try again.")
-    
-        else:
-            print("\nInvalid input. Please try again.")
-            '''
         print("\nWelcome to the Library Management System. Below is a list of the available options:"
                 "\n 1) Add book \n 2) Remove book \n 3) Add user \n 4) Remove user \n 5) Borrow book \n 6) Return book" 
                 "\n 7) List available books\n 0) Quit program" )
@@ -464,45 +294,7 @@ while user_input != str(0):
     elif user_input == str(6):
         
         Library.return_book()
-        
-        '''
-        print('\nYou have selected the "Return book" option.')  
 
-        print('\nBelow is a list of the books that can be returned: ')
-
-        checked_out_list = []
-    
-        for k in users_list:
-            checked_out_book = k.borrowed_books
-
-            str_chk_out_book = checked_out_book[0]
-            
-            checked_out_list.append(str_chk_out_book)
-            
-        print(checked_out_list)
-
-        book_to_return = input("\nPlease enter the title of the book you would like to return: ")
-
-        if book_to_return in checked_out_list:
-            print("\nYou have selected to return " + book_to_return)
-            for m in checked_out_master_list:
-                if m.title == book_to_return:
-                    m.return_book()
-                    books_list.append(m)
-                    books_str_list.append(m.title)
-                    print("\nBelow is a list of the available books: ")
-                    print()
-                    print(books_str_list)
-                else:
-                    continue
-
-
-        else:
-            print("Invalid input. Please try again.")
-                '''
-
-
-        
         print("\nWelcome to the Library Management System. Below is a list of the available options:"
                 "\n 1) Add book \n 2) Remove book \n 3) Add user \n 4) Remove user \n 5) Borrow book \n 6) Return book" 
                 "\n 7) List available books\n 0) Quit program" )
@@ -518,12 +310,6 @@ while user_input != str(0):
     
         user_input = input("\nPlease enter the number associated with the option you would like to select: ")
         
-        '''
-    print('\nYou have selected the "List available books" option.')
-
-    print(books_list)
-        '''
-    
 
     else:
         
@@ -532,8 +318,6 @@ while user_input != str(0):
 
 if user_input == str(0):
     print("\nThank you for using the Library Management System!\n")
-# input("\nPlease enter the number associated with the option you would like to select:")
-
 
 
 
