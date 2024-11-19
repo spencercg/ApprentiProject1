@@ -15,7 +15,7 @@ class Library:
         user_input_isbn = input("\nPlease enter the new book's ISBN number: ")
         new_book = Book(user_input_title, user_input_author, user_input_isbn, True)
         new_book_title = new_book.title
-
+        
         books_str_list.append(new_book_title)
         print()
         print(new_book_title + " has been successfully added.")
@@ -23,7 +23,7 @@ class Library:
         print(books_str_list)
 
         books_list.append(new_book)
-
+            
     def remove_book():
 
         print('\nYou have selected the "Remove book" option.')
@@ -306,6 +306,9 @@ while user_input != str(0):
 
     if user_input == str(1):
         Library.add_book()
+
+        
+
 
         print("\nWelcome to the Library Management System. Below is a list of the available options:"
                 "\n 1) Add book \n 2) Remove book \n 3) Add user \n 4) Remove user \n 5) Borrow book \n 6) Return book" 

@@ -25,7 +25,7 @@ class TestUser(unittest.TestCase):
         user_2 = User("Betty", "0002", [book_2.title])
 
         test_borrowed_book_list = user_2.view_borrowed_books()
-        self.assertIn(book_2.title, user_2.borrowed_books)
+        self.assertIn(book_2.title, test_borrowed_book_list)
 
 
 if __name__ == '__main__':
