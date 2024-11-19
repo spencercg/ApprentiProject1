@@ -527,7 +527,7 @@ while user_input != str(0):
 
     else:
         
-        print('\nInvalid input. Please try again and select from list of available options.')
+        print('\nInvalid input. Please try again and select from list of available options.\n')
         break
 
 if user_input == str(0):
