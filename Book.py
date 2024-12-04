@@ -18,7 +18,7 @@ class Book:
     def return_book(self):
         
         self.available = True
-        print()
+        
         # print(self.title + " is now marked as " + str(self.available))
         
         
