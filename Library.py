@@ -185,7 +185,10 @@ class Library:
 
                     books_list.append(p)
                     returned_book_title = p.title.__str__()
-                    books_str_list.append(returned_book_title)
+                    if returned_book_title not in books_str_list:
+                        books_str_list.append(returned_book_title)
+                    else:
+                        continue 
 
                 else:
                     continue
@@ -196,7 +199,10 @@ class Library:
                     q.return_book()
                     # print(q.available)
                     returned_book_title = q.title.__str__()
-                    books_str_list.append(returned_book_title)
+                    if returned_book_title not in books_str_list:
+                        books_str_list.append(returned_book_title)
+                    else:
+                        continue
 
                 else:
                     continue
