@@ -83,6 +83,8 @@ class Library:
 
     def borrow_book():
 
+
+
         print('\nYou have selected the "Borrow book" option.')  
 
         print('\nBelow is a list of the available books: ')
@@ -105,15 +107,21 @@ class Library:
                 print()
                 print(borrow_book_title + " has been successfully borrowed by " + borrow_user_name + ".")
 
-                for i in books_str_list:
-                    if i == borrow_book_title:
-                        index_book = books_str_list.index(i)
-                        books_list[index_book].borrow_book()
-                        books_str_list.remove(i)
+                for h in books_str_list:
+                    if h == borrow_book_title:
+                        # index_book = books_str_list.index(i)
+                        # books_list[index_book].borrow_book()
+                        books_str_list.remove(h)
                         print()
 
                     else:
                         continue
+
+                for i in books_list:
+                    if i.title == borrow_book_title:
+                        i.borrow_book()
+                    else:
+                        continue    
 
                 for j in users_str_list:
                     if j == borrow_user_name:
@@ -141,7 +149,8 @@ class Library:
         
         for m in books_list:
             if m.available == False and m.title not in checked_out_master_list_str:
-                checked_out_master_list_str.append(m.title)
+                str_title = m.__str__()
+                checked_out_master_list_str.append(str_title)
             else:
                 continue
 
@@ -162,13 +171,14 @@ class Library:
                 print()
                 print(b.name + " is returning " + book_to_return + ".")
                 b.return_book(book_to_return)
+
                 print("\nThank you for returning " + book_to_return + "!")
             else:
                 continue
 
 
         if book_to_return in checked_out_master_list_str:
-            checked_out_master_list_str.remove(book_to_return)
+            
             for p in checked_out_starter_list:
                 if p.title == book_to_return:
                     p.return_book()
@@ -180,9 +190,24 @@ class Library:
                 else:
                     continue
 
+            for q in books_list:
+                if q.title == book_to_return:
+                    # print(checked_out_master_list_str)
+                    q.return_book()
+                    # print(q.available)
+                    returned_book_title = q.title.__str__()
+                    books_str_list.append(returned_book_title)
+
+                else:
+                    continue
+
+            # checked_out_master_list_str.remove(book_to_return)
+            # print(checked_out_master_list_str)
+            
+
         else:
             print("\nInvalid input. Please try again.")
-            
+   
     def list_available_books():
         print('\nYou have selected the "List available books" option.')
         print("\nBelow is a list of the available books: ")

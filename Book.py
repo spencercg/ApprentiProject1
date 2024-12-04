@@ -19,7 +19,7 @@ class Book:
         
         self.available = True
         print()
-        # print(self.title + " is now available to be borrowed.")
+        # print(self.title + " is now marked as " + str(self.available))
         
         
     def __init__(self, title, author, isbn, available):
